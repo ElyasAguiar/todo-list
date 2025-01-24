@@ -10,30 +10,30 @@
 
         <div class="col-md-5 offset-md-3">
 
-            <h1 class="text-center">  Tarefas Pendentes </h1>
+            <h1 class="text-center"> Tarefas Pendentes </h1>
 
-                <ul class="list-group">
+            <ul class="list-group">
 
-                    {% for task in tasks %}
+                {% for task in tasks %}
 
-                    <a class="list-group-item" href="{% url 'task_detalhe'  task.id %}">
+                <a class="list-group-item" href="{% url 'task_detalhe'  task.id %}">
 
-                            <header class="d-flex justify-content-between">
+                    <header class="d-flex justify-content-between">
 
-                                {% if task.important %}
+                        {% if task.important %}
 
-                                    <strong class="fw-bold text-success">  {{task.title}}</strong>
+                        <strong class="fw-bold text-success"> {{task.title}}</strong>
 
-                                {% else %}    
+                        {% else %}
 
 
-                                <p class="fw-bold"> {{task.title}} </p>
+                        <p class="fw-bold"> {{task.title}} </p>
 
-                                {% endif %}
+                        {% endif %}
 
-                                <p> By: {{ task.user.username }}</p>
+                        <p> By: {{ task.user.username }}</p>
 
-                            </header>
+                    </header>
 
 
                     {% endfor %}
@@ -41,13 +41,13 @@
 
 
 
-                </ul>
+            </ul>
 
 
         </div>
 
     </div>
 
-</main>     
+</main>
 
-{% endblock %}    
+{% endblock %}

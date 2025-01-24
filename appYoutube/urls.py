@@ -13,20 +13,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
 from task import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('sigup/', views.sigup, name='sigup'),
-    path('sigin/', views.sigin, name='sigin'),
-    path('sair/', views.sair, name='sair'),
-    path('tasks/', views.tasks, name='tasks'),
-     path('criando/tarefa/', views.criando_tarefa, name='criando_tarefa'),
-    path('criando/<int:task_id>/', views.task_detalhe, name='task_detalhe'), 
-    path('criando/<int:task_id>/complete', views.complete_tarefa, name='complete_tarefa'), 
-    path('criando/<int:task_id>/delete', views.deletar_tarefa, name='deletar_tarefa'), 
-    path('exibir_tarefas_completadas', views.exibir_tarefas_completadas, name='exibir_tarefas_completadas'), 
+    path("admin/", admin.site.urls),
+    path("", views.home, name="home"),
+    path("sigup/", views.sigup, name="sigup"),
+    path("sigin/", views.sigin, name="sigin"),
+    path("sair/", views.sair, name="sair"),
+    path("tasks/", views.tasks, name="tasks"),
+    path("criando/tarefa/", views.criando_tarefa, name="criando_tarefa"),
+    path("criando/<int:task_id>/", views.task_detalhe, name="task_detalhe"),
+    path(
+        "criando/<int:task_id>/complete", views.complete_tarefa, name="complete_tarefa"
+    ),
+    path("criando/<int:task_id>/delete", views.deletar_tarefa, name="deletar_tarefa"),
+    path(
+        "exibir_tarefas_completadas",
+        views.exibir_tarefas_completadas,
+        name="exibir_tarefas_completadas",
+    ),
 ]
