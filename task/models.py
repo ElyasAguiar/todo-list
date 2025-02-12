@@ -10,7 +10,7 @@ class Task(models.Model):
     datecompleted = models.DateTimeField(null=True, blank=True)
     important = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title + " - by: " + self.user.username
