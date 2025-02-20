@@ -1,8 +1,14 @@
 from django import forms
-from .models import Task
+from .models import Commitment
 
 
-class TaskForm(forms.ModelForm):
+class CommitmentForm(forms.ModelForm):
     class Meta:
-        model = Task
-        fields = ["title", "describe", "important", "category"]
+        model = Commitment
+        fields = [
+            "title",
+            "describe",
+            "status",
+            "date_commitmment",
+            "category",
+        ]

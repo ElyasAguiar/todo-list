@@ -116,11 +116,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
-
 LOGIN_URL = "sigin"
 
 # Default primary key field type
+STATIC_URL = "static/"
+
+# Adicione esta linha para incluir o diretório de arquivos estáticos do aplicativo
+STATICFILES_DIRS = [
+    BASE_DIR / "task/static",
+]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

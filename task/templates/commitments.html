@@ -1,0 +1,64 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+
+<main class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <h2 class="text-center">Pendentes</h2>
+            <ul class="list-group kanban-column">
+                {% for commitment in commitments %}
+                {% if commitment.status == 'pending' %}
+                <li class="list-group-item kanban-item">
+                    <a href="{% url 'commitment_detalhe' commitment.id %}">
+                        <header class="d-flex justify-content-between">
+                            <p class="fw-bold">{{ commitment.title }}</p>
+                            <p>{{ commitment.category }}</p>
+                            <p>By: {{ commitment.user.username }}</p>
+                        </header>
+                    </a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h2 class="text-center">Em Progresso</h2>
+            <ul class="list-group kanban-column">
+                {% for commitment in commitments %}
+                {% if commitment.status == 'in_progress' %}
+                <li class="list-group-item kanban-item">
+                    <a href="{% url 'commitment_detalhe' commitment.id %}">
+                        <header class="d-flex justify-content-between">
+                            <p class="fw-bold">{{ commitment.title }}</p>
+                            <p>{{ commitment.category }}</p>
+                            <p>By: {{ commitment.user.username }}</p>
+                        </header>
+                    </a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h2 class="text-center">Concluídos</h2>
+            <ul class="list-group kanban-column">
+                {% for commitment in commitments %}
+                {% if commitment.status == 'completed' %}
+                <li class="list-group-item kanban-item">
+                    <a href="{% url 'commitment_detalhe' commitment.id %}">
+                        <header class="d-flex justify-content-between">
+                            <strong class="fw-bold text-success">{{ commitment.title }}</strong>
+                            <p>{{ commitment.category }}</p>
+                            <p>By: {{ commitment.user.username }}</p>
+                        </header>
+                    </a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

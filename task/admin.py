@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from .models import Task, Category
+from .models import Commitment, Category
 
 # Register your models here.
-class TaskAdmin(admin.ModelAdmin):
-    list_display = ["title", "describe", "created", "datecompleted", "important", "user", "category"]
+class CommitmentAdmin(admin.ModelAdmin):
+    list_display = ["title", "describe", "created", "datecompleted", "user", "category"]
     readonly_fields = ["created"]
 
 
-admin.site.register(Task)
+admin.site.register(Commitment)
 admin.site.register(Category)
