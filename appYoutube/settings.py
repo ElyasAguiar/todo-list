@@ -9,6 +9,10 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import os
+import dj_database_url
+from dotenv import load_dotenv
+load_dotenv()
 
 from pathlib import Path
 
@@ -74,12 +78,24 @@ WSGI_APPLICATION = "appYoutube.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "Todo-List-db",
+            "USER": "neondb_owner",
+            "PASSWORD": "npg_mW3rEQdPYho2",
+            "HOST": "ep-hidden-flower-a4qcbrhy-pooler.us-east-1.aws.neon.tech",
+            "PORT": "5432",
+            "OPTIONS": {"sslmode": "require"},
+        }
+    }
 
 
 # Password validation
