@@ -133,3 +133,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EMAIL_REMETENTE = "jeffb612300@gmail.com"
 EMAIL_SECRET_KEY = "plksebfrondpkvhb"  # Use uma App Password do Google
 EMAIL_DESTINATARIO = "gustavo88745482@gmail.com"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"  # Substitua pelo host do seu servidor de email
+EMAIL_PORT = 587  # Porta do servidor de email
+EMAIL_USE_TLS = True  # Use TLS
+EMAIL_HOST_USER = "jeffb612300@gmail.com"  # Seu email
+EMAIL_HOST_PASSWORD = "plksebfrondpkvhb"  # Sua senha de email (App Password)
