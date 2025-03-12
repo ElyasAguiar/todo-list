@@ -9,14 +9,14 @@
 
             {{error}}
 
-            <form action="#" method="POST" class="card card-body">
+            <form action="#" method="POST" class="card card-body shadow-sm p-4 mb-4 bg-white rounded">
                 {% csrf_token %}
-                {{form.as_p}}
+                {{ form.as_p }}
 
                 <button type="submit" class="btn btn-primary mt-2"> Atualizar </button>
             </form>
 
-            <div class="mt-5 d-flex">
+            <div class="mt-5 d-flex justify-content-between">
                 <form action="{% url 'complete_tarefa' commitment.id %}" method="POST">
 
                     {% csrf_token %}
@@ -34,12 +34,8 @@
     </div>
 </main>
 
-
 </br>
 </br>
 </br>
-
-
-
 
 {% endblock %}

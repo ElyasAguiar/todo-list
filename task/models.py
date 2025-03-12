@@ -24,6 +24,7 @@ class Commitment(models.Model):
     category = models.ForeignKey(
         "Category", on_delete=models.CASCADE, null=True, blank=True
     )
+    convidados = models.ManyToManyField(User, related_name='commitments_convidados', blank=True)
 
     def __str__(self):
         return self.title + " - by: " + self.user.username
