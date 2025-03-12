@@ -1,57 +1,123 @@
-/* Paleta de cores em variação de azul e cinza */
+/* Paleta de cores otimizada para melhor contraste e maior clareza */
 body {
-  background-color: #f0f2f5;
+  background-color: #f9fafb;
+  /* Cor de fundo mais clara */
+  color: #4b4f56;
+  /* Texto com tom mais suave */
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Suavizando transições de fundo e texto */
 }
 
+/* Barra de navegação */
 .navbar-dark {
-  background-color: #2c3e50 !important;
-  /* Azul escuro */
+  background-color: #3498db !important;
+  /* Substituí o verde por um azul claro */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  /* Suavizando a transição da cor de fundo */
 }
 
 .navbar-dark .navbar-brand,
 .navbar-dark .nav-link {
   color: #ecf0f1 !important;
-  /* Cinza claro */
+  transition: color 0.3s ease;
+  /* Suavizando a transição das cores do texto */
+}
+
+.navbar-dark .nav-link:hover {
+  color: #2980b9 !important;
+  /* Tom de azul mais escuro para hover */
 }
 
 .navbar-dark .nav-link.active {
-  color: #3498db !important;
-  /* Azul claro */
+  color: #1f80b3 !important;
+  /* Azul mais forte para ativo */
+  font-weight: bold;
 }
 
+/* Botões */
 .btn-outline-success {
-  color: #2c3e50 !important;
-  border-color: #2c3e50 !important;
+  color: #3498db !important;
+  border-color: #3498db !important;
+  transition: all 0.3s ease;
+  /* Suavizando a transição de todos os estados do botão */
 }
 
 .btn-outline-success:hover {
-  background-color: #3498db !important;
-  border-color: #2c3e50 !important;
+  background-color: #2980b9 !important;
+  /* Cor de fundo de hover mais escura */
+  border-color: #3498db !important;
+  color: #fff !important;
+  transform: scale(1.05);
 }
 
+/* Kanban */
 .kanban-column {
-  background-color: #ecf0f1 !important;
-  /* Cinza muito claro */
-  border: 1px solid #2c3e50 !important;
-  border-radius: 5px;
-  padding: 10px;
+  background-color: #ffffff !important;
+  /* Cor mais clara para as colunas */
+  border: 1px solid #bdc3c7 !important;
+  /* Bordas mais suaves */
+  border-radius: 8px;
+  padding: 15px;
   margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  /* Transição suave para fundo e transformação */
 }
 
 .kanban-item {
-  background-color: #bdc3c7 !important;
-  /* Cinza claro */
-  border: 1px solid #2c3e50 !important;
-  border-radius: 5px;
+  background-color: #e5e8e8 !important;
+  /* Cor mais suave para os itens */
+  border: 1px solid #bdc3c7 !important;
+  /* Bordas mais suaves */
+  border-radius: 8px;
+  padding: 12px;
   margin-bottom: 10px;
-  padding: 10px;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  /* Transição suave no hover */
+}
+
+.kanban-item:hover {
+  background-color: #d5d8dc !important;
+  /* Cor de fundo mais clara para hover */
+  transform: scale(1.02);
 }
 
 .kanban-item a {
-  color: #2c3e50 !important;
+  color: #3498db !important;
+  /* Texto com o tom de azul claro */
   text-decoration: none;
+  transition: color 0.3s ease;
+  /* Transição suave na cor do link */
 }
 
 .kanban-item a:hover {
+  color: #2980b9 !important;
+  /* Cor de link para o azul mais escuro */
+  text-decoration: underline;
+}
+
+/* Ajuste de cores dos textos dentro das caixas */
+.kanban-column h3,
+.kanban-item p {
+  color: #4b4f56 !important;
+  /* Texto com tom mais suave e neutro */
+}
+
+.kanban-item a {
   color: #3498db !important;
+  /* Cor de link ajustada para o tom de azul claro */
+}
+
+
+#id_title,
+#id_describe,
+#id_status,
+#id_date_commitmment,
+#id_convidados {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  margin-bottom: 1rem;
 }

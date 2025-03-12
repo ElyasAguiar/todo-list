@@ -128,3 +128,8 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Configurações de e-mail
+EMAIL_REMETENTE = "jeffb612300@gmail.com"
+EMAIL_SECRET_KEY = "plksebfrondpkvhb"  # Use uma App Password do Google
+EMAIL_DESTINATARIO = "gustavo88745482@gmail.com"

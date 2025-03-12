@@ -186,3 +186,15 @@ def exibir_tarefas_completadas(request):
     ).order_by
     ("-date_commitmment")
     return render(request, "commitments.html", {"commitments": commitments})
+
+def editar_commitment(request, commitment_id):
+    commitment = get_object_or_404(Commitment, id=commitment_id)
+    if request.method == 'POST':
+        form = CommitmentForm(request.POST, instance=commitment)
+        if form.is_valid():
+            form.save()
+            form.save_m2m()  # Save the many-to-many data for convidados
+            return redirect('task:detalhes', commitment_id=commitment.id)
+    else:
+        form = CommitmentForm(instance=commitment)
+    return render(request, 'task/editar_commitment.html', {'form': form})
