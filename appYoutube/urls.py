@@ -36,4 +36,10 @@ urlpatterns = [
         views.exibir_tarefas_completadas,
         name="exibir_tarefas_completadas",
     ),
+    path("criando/<int:commitment_id>/add_step", views.add_step, name="add_step"),
+    path("categories/", views.category_list, name="category_list"),
+    path("categories/create/", views.category_create, name="category_create"),
+    path("categories/<int:category_id>/", views.category_detail, name="category_detail"),
+    path("categories/<int:category_id>/update/", views.category_update, name="category_update"),
+    path("categories/<int:category_id>/delete/", views.category_delete, name="category_delete"),
 ]

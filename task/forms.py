@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Commitment
+from .models import Step
+from .models import Category
 
 class UserCreationFormWithEmail(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -33,3 +35,13 @@ class CommitmentForm(forms.ModelForm):
 widgets = {
             'date_commitmment': forms.DateInput(attrs={'type': 'date'}),
         }
+
+class StepForm(forms.ModelForm):
+    class Meta:
+        model = Step
+        fields = ['title', 'describe']
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name']

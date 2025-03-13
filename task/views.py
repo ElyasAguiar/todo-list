@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import CommitmentForm, UserCreationFormWithEmail
+from .forms import CommitmentForm, UserCreationFormWithEmail, StepForm, CategoryForm
 from .models import Commitment, Category
 from django.utils import timezone
 from django.core.mail import send_mail
@@ -126,8 +126,9 @@ def commitment_detalhe(request, commitment_id):
     if request.method == "GET":
         commitment = get_object_or_404(Commitment, pk=commitment_id, user=request.user)
         form = CommitmentForm(instance=commitment)
+        steps = commitment.steps.all()
         return render(
-            request, "commitment_detalhe.html", {"commitment": commitment, "form": form}
+            request, "commitment_detalhe.html", {"commitment": commitment, "form": form, "steps": steps}
         )
     else:
         return update_commitment(request, commitment_id)
@@ -197,3 +198,59 @@ def update_commitment(request, commitment_id):
     else:
         form = CommitmentForm(instance=commitment)
     return render(request, 'commitment_detalhe.html', {'form': form, 'commitment': commitment})
+
+@login_required
+def add_step(request, commitment_id):
+    commitment = get_object_or_404(Commitment, pk=commitment_id, user=request.user)
+    if request.method == "POST":
+        form = StepForm(request.POST)
+        if form.is_valid():
+            step = form.save(commit=False)
+            step.commitment = commitment
+            step.save()
+            return redirect("commitment_detalhe", commitment_id=commitment.id)
+    else:
+        form = StepForm()
+    steps = commitment.steps.all()
+    return render(request, "commitment_detalhe.html", {"form": form, "commitment": commitment, "steps": steps})
+
+@login_required
+def category_list(request):
+    categories = Category.objects.all()
+    return render(request, "category.html", {"categories": categories})
+
+@login_required
+def category_create(request):
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("category_list")
+    else:
+        form = CategoryForm()
+    return render(request, "category_form.html", {"form": form})
+
+@login_required
+def category_detail(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    return render(request, "category_detalhe.html", {"category": category})
+
+@login_required
+def category_update(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    if request.method == "POST":
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect("category_detail", category_id=category.id)
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, "category_form.html", {"form": form})
+
+@login_required
+def category_delete(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    if request.method == "POST":
+        category.delete()
+        return redirect("category_list")
+    return render(request, "category_confirm_delete.html", {"category": category})

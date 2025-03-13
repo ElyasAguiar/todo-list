@@ -9,7 +9,7 @@ class Commitment(models.Model):
         ("completed", "Concluído"),
     ]
 
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=200)
     describe = models.TextField(blank=True)
     status = models.CharField(
         max_length=20,
@@ -34,7 +34,7 @@ class Step(models.Model):
     title = models.CharField(max_length=100)
     describe = models.TextField(blank=True)
     status = models.BooleanField(default=False)
-    commitment = models.ForeignKey("Commitment", on_delete=models.CASCADE)
+    commitment = models.ForeignKey("Commitment", on_delete=models.CASCADE, related_name='steps')
     created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):

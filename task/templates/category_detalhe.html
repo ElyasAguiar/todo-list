@@ -1,0 +1,12 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+<main class="container mt-5">
+    <h1 class="text-center">{{ category.name }}</h1>
+    <a href="{% url 'category_update' category.id %}" class="btn btn-warning">Editar</a>
+    <form action="{% url 'category_delete' category.id %}" method="POST" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Deletar</button>
+    </form>
+</main>
+{% endblock %}

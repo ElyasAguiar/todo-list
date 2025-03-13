@@ -4,42 +4,98 @@
 
 <main class="container mt-5">
     <div class="row">
-        <div class="col-md-5 offset-md-3">
-            <h1 class="text-center"> Detalhes do Compromisso </h1>
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-center">Detalhes do Compromisso</h1>
 
             {{error}}
 
-            <form action="#" method="POST" class="card card-body">
-                {% csrf_token %}
-                {{form.as_p}}
+            <div class="card mb-3">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h2>{{ commitment.title }}</h2>
+                    <div>
+                        <form action="{% url 'complete_tarefa' commitment.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success me-2">Completar</button>
+                        </form>
+                        <form action="{% url 'deletar_tarefa' commitment.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Deletar</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>{{ commitment.describe }}</p>
+                    <p>Status: {{ commitment.status }}</p>
+                    <p>Data: {{ commitment.date_commitmment }}</p>
+                </div>
+            </div>
 
-                <button type="submit" class="btn btn-primary mt-2"> Atualizar </button>
-            </form>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3>Tarefas</h3>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStepModal">
+                        Adicionar Tarefa
+                    </button>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for step in commitment.steps.all %}
+                        <li class="list-group-item">
+                            <h5>{{ step.title }}</h5>
+                            <p>{{ step.describe }}</p>
+                            <p>Status: {{ step.status|yesno:"Concluído,Pendente" }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-            <div class="mt-5 d-flex">
-                <form action="{% url 'complete_tarefa' commitment.id %}" method="POST">
+            <!-- Modal -->
+            <div class="modal fade" id="addStepModal" tabindex="-1" aria-labelledby="addStepModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addStepModalLabel">Adicionar Tarefa</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addStepForm" action="{% url 'add_step' commitment.id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="step_title">Título da Tarefa</label>
+                                    <input type="text" name="title" class="form-control" id="step_title" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="step_describe">Descrição da Tarefa</label>
+                                    <textarea name="describe" class="form-control" id="step_describe"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary" form="addStepForm">Adicionar Tarefa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    {% csrf_token %}
-
-                    <button type="submit" class="btn btn-success"> Completar </button>
-
-                </form>
-
-                <form action="{% url 'deletar_tarefa' commitment.id %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger "> Deletar </button>
-                </form>
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h3>Atualizar Compromisso</h3>
+                </div>
+                <div class="card-body">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <button type="submit" class="btn btn-primary mt-2">Atualizar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </main>
 
-
 </br>
 </br>
 </br>
-
-
-
 
 {% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+<main class="container mt-5">
+    <h1 class="text-center">Adicionar/Editar Categoria</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+</main>
+{% endblock %}
